@@ -24,8 +24,8 @@ public class MysqlDAOFactory extends DAOFactory {
     private String sql;
 
     public static Connection conexion() throws SQLException {
-        String user = "root";
-        String clave = "1234";
+        String user = "nano";
+        String clave = "nano";
         Connection cn = null;
         try {
             //CLASE USADA PARA EL DRIVER

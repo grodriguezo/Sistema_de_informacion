@@ -17,6 +17,9 @@ public class Enfermera extends Usuario {
     private String Correo;
     private String Direccion;
     private int Telefono;
+    private int idCiudad;
+    private int ccAdministrador;
+    
 
     public Enfermera(){
         
@@ -64,6 +67,18 @@ public class Enfermera extends Usuario {
     this.Usuario= Usuario;}
     public String getUsuario(){
     return Usuario;
+    }
+    public void setIdCiudad(int id){
+        idCiudad=id;
+    }
+    public int getIdCiudad(){
+        return idCiudad;
+    }
+    public void setCcAdministrador(int id){
+        ccAdministrador=id;
+    }
+    public int getCcAdministrador(){
+        return ccAdministrador;
     }
     public void AgregarPaciente(){}
     public void ModificarPaciente(){}

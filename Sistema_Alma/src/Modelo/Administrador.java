@@ -49,10 +49,10 @@ public class Administrador extends Usuario {
         return Usuario;
     }
 
-    /* public ArrayList<Enfermera> AgregarEnfermera(Enfermera enfermera, ArrayList<Enfermera> listaEnfermeras) {
+    public ArrayList<Enfermera> AgregarEnfermera(Enfermera enfermera, ArrayList<Enfermera> listaEnfermeras) {
         for(int cont=0;cont<listaEnfermeras.size();cont++){
             if(enfermera.getCC()==listaEnfermeras.get(cont).getCC()){
-                System.out.println("ya existe una enfermera con esta CC");
+                System.out.println("ya existe una enfermera con esta identificacion");
                 cont=listaEnfermeras.size();
             }
             else if(cont==(listaEnfermeras.size()-1)&&enfermera.getCC()!=listaEnfermeras.get(cont).getCC()){
@@ -61,7 +61,7 @@ public class Administrador extends Usuario {
             }
         }
         return listaEnfermeras;
-    }*/
+    }
     public void ModificarEnfermera() {
     }
 

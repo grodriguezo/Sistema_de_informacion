@@ -19,22 +19,37 @@ public class MysqlDAOEnfermera implements DAOEnfermera {
 
     @Override
     public void insertarEnfermera(Enfermera enfermera) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    try {
-            String sql= "INSERT INTO enfermera (CC_Enfermera, Nombre, Direccion, Correo, edad, id_ciudad, Contraseña, Telefono, Usuario, CC_Administrador) "
-			+ "VALUES ("+enfermera.getCC()+", '"+enfermera.getNombre()+"', '"+enfermera.getDireccion()+"', '"+enfermera.getCorreo() +", '"+enfermera.getEdad()+"', '"+enfermera.getContraseña()+"', '"+enfermera.getTelefono()+"', '"+enfermera.getUsuario() +"');";
+        try {
+            String sql = "INSERT INTO enfermera (CC_Enfermera, Nombre, Direccion, Correo, edad, id_ciudad, Contraseña, Telefono, Usuario, CC_Administrador) "
+                    + "VALUES (" + enfermera.getCC() + ", '" + enfermera.getNombre() + "', '"+ enfermera.getDireccion() + "', '" + enfermera.getCorreo() + "', '" + enfermera.getEdad() + "', " + enfermera.getIdCiudad() + ", '" + enfermera.getContraseña() + "', '" + enfermera.getTelefono() + "', '"  + enfermera.getUsuario() + "', '" + enfermera.getCcAdministrador() + "');";
             Statement st = conexion.createStatement();
             st.executeUpdate(sql);
-	} catch (SQLException e) {
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-	}
+        }
     
     }
 
     @Override
     public void modificarEnfermera(Enfermera enfermera) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            String sql = "UPDATE enfermera SET "
+                    + "Nombre='"+ enfermera.getNombre() 
+                    + "',Direccion= '" + enfermera.getDireccion() 
+                    + "',Correo='"+ enfermera.getCorreo() 
+                    + "',edad= " + enfermera.getEdad() 
+                    + ",Id_Ciudad= " + enfermera.getIdCiudad()  
+                    + ",Contraseña= '" + enfermera.getContraseña()  
+                    + "',Telefono= " + enfermera.getTelefono() 
+                    + ",Usuario= '" + enfermera.getUsuario()
+                    + "' WHERE CC_Enfermera='"+enfermera.getCC()+"';";
+            Statement st = conexion.createStatement();
+            st.executeUpdate(sql);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -72,26 +87,25 @@ public class MysqlDAOEnfermera implements DAOEnfermera {
      //   return lista;
     //}
     
-     public boolean consultarEnfermera(String usuario,String contraseña){
+    public boolean consultarEnfermera(String usuario,String contraseña){
         boolean enfermera =false;
-                    try {
-                        
-                        String sql= "SELECT Usuario,Contraseña FROM alma_innovation.enfermera where Usuario='"+usuario+"' and Contraseña='"+contraseña+"'";
-                        Statement st = conexion.createStatement();
-                        ResultSet rs = st.executeQuery(sql);
-                        while (rs.next()) {
-                           String userdb=rs.getString("Usuario");
-                           String passdb=rs.getString("Contraseña");
-                        if (userdb.equals(usuario)&& passdb.equals(contraseña)){
-                          enfermera=true;
-                        }
-                        }
-                        } catch (SQLException e) {
-                        // TODO Auto-generated catch block
-                         e.printStackTrace();
-                    }
-    return enfermera;
+        try {
+            String sql= "SELECT Usuario,Contraseña FROM alma_innovation.enfermera where Usuario='"+usuario+"' and Contraseña='"+contraseña+"'";
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                String userdb=rs.getString("Usuario");
+                String passdb=rs.getString("Contraseña");
+                if (userdb.equals(usuario)&& passdb.equals(contraseña)){
+                    enfermera=true;
+                }
             }
+        } 
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return enfermera;
+    }
 
     @Override
     public ArrayList getListaEnfermera() {
