@@ -42,11 +42,11 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         t_cc = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        t_telefono = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         t_dir = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        t_correo = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -88,12 +88,12 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
         jLabel4.setText("Telefono:");
         panel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 126, -1, -1));
 
-        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+        t_telefono.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextField4KeyTyped(evt);
+                t_telefonoKeyTyped(evt);
             }
         });
-        panel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 123, 290, -1));
+        panel1.add(t_telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 123, 290, -1));
 
         jLabel5.setText("Dirección:");
         panel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
@@ -101,7 +101,7 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
 
         jLabel6.setText("Correo:");
         panel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(473, 157, -1, -1));
-        panel1.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 154, 290, -1));
+        panel1.add(t_correo, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 154, 290, -1));
 
         jLabel7.setText("Departamento:");
         panel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, -1, -1));
@@ -164,40 +164,6 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_botonGuardarActionPerformed
-
-    private void t_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_nombreKeyTyped
-        char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_t_nombreKeyTyped
-
-    private void t_ccKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_ccKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_t_ccKeyTyped
-
-    private void jTextField4KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
-            evt.consume();
-        }
-
-    }//GEN-LAST:event_jTextField4KeyTyped
-
-    private void t_usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_usuarioKeyTyped
-        char c = evt.getKeyChar();
-        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
-            evt.consume();
-        }
-    }//GEN-LAST:event_t_usuarioKeyTyped
-
-    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
         if (t_nombre.getText().equals("")) {
             JOptionPane.showMessageDialog(rootPane, "Ingrese nombre");
         } else if (t_cc.getText().equals("")) {
@@ -215,8 +181,12 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
                         Enfermera enfermeraNueva = new Enfermera();
                         enfermeraNueva.SetCC(Integer.parseInt(t_cc.getText()));
                         enfermeraNueva.SetNombre(t_nombre.getText());
-                        enfermeraNueva.SetUsuario(t_usuario.getText());
+                        enfermeraNueva.SetDireccion(t_dir.getText());
+                        enfermeraNueva.SetCorreo(t_correo.getText());
+                        enfermeraNueva.SetEdad((Integer)edad.getSelectedItem());
                         enfermeraNueva.SetContraseña(enfermeraNueva.md5(t_contra.getText()));
+                        enfermeraNueva.SetUsuario(t_telefono.getText());
+                        enfermeraNueva.SetIdCiudad((Integer)ciudad.getSelectedItem());
 
                         MDC.getDAOEnfermera().insertarEnfermera(enfermeraNueva);
                         JOptionPane.showMessageDialog(rootPane, "Inserto Satisfactoriamente");
@@ -235,6 +205,39 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
                 Logger.getLogger(Agregar_Administrador.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }//GEN-LAST:event_botonGuardarActionPerformed
+
+    private void t_nombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_nombreKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_t_nombreKeyTyped
+
+    private void t_ccKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_ccKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_t_ccKeyTyped
+
+    private void t_telefonoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_telefonoKeyTyped
+        char c = evt.getKeyChar();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
+
+    }//GEN-LAST:event_t_telefonoKeyTyped
+
+    private void t_usuarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_usuarioKeyTyped
+        char c = evt.getKeyChar();
+        if ((c < 'a' || c > 'z') && (c < 'A') | c > 'Z') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_t_usuarioKeyTyped
+
+    private void botonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCancelarActionPerformed
 
     }//GEN-LAST:event_botonCancelarActionPerformed
 
@@ -289,13 +292,13 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     private org.edisoncor.gui.panel.Panel panel1;
     private javax.swing.JTextField t_cc;
     private javax.swing.JTextField t_contra;
+    private javax.swing.JTextField t_correo;
     private javax.swing.JTextField t_dir;
     private javax.swing.JTextField t_nombre;
+    private javax.swing.JTextField t_telefono;
     private javax.swing.JTextField t_usuario;
     // End of variables declaration//GEN-END:variables
 }

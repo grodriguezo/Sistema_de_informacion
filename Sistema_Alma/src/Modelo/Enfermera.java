@@ -34,7 +34,7 @@ public class Enfermera extends Usuario {
         Edad=edad;
         Contraseña=contrasena;
         Telefono = telefono;
-        
+        ccAdministrador=ccadmin;
     }
 
     
@@ -79,13 +79,13 @@ public class Enfermera extends Usuario {
     public String getUsuario(){
     return Usuario;
     }
-    public void setIdCiudad(int id){
+    public void SetIdCiudad(int id){
         idCiudad=id;
     }
     public int getIdCiudad(){
         return idCiudad;
     }
-    public void setCcAdministrador(int id){
+    public void SetCcAdministrador(int id){
         ccAdministrador=id;
     }
     public int getCcAdministrador(){
