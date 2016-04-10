@@ -24,7 +24,7 @@ public class Empresa {
         Mysql = DAOFactory.getDAOFactory(1);
     }
     public void cargarListaEnfermeras() {
-        ListaEnfermera = Mysql.getDAOEnfermera().getListaEnfermera();
+        //ListaEnfermera = Mysql.getDAOEnfermera().getListaEnfermera();
     }
 
     public void verInformacionPacientes() {

@@ -22,9 +22,20 @@ public class Enfermera extends Usuario {
     
 
     public Enfermera(){
+        Edad=0;
+        Correo="";
+    }
+    
+       public Enfermera(int cc, String nombre, String dir, String correo, int edad, int idcity, String contrasena, int telefono, String user, int ccadmin) {
+        CC=cc;
+        Nombre=nombre;
+        Direccion=dir;
+        Correo=correo;
+        Edad=edad;
+        Contraseña=contrasena;
+        Telefono = telefono;
         
     }
-   
 
     
     

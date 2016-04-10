@@ -1,5 +1,6 @@
 package Modelo;
 
+import DAO.DAOFactory;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 
@@ -13,6 +14,7 @@ import java.util.ArrayList;
  * @author Gustavo Rodriguez
  */
 public class Administrador extends Usuario {
+    private DAOFactory dao;
 
     public void SetNombre(String Nombre) {
         this.Nombre = Nombre;
@@ -49,23 +51,15 @@ public class Administrador extends Usuario {
         return Usuario;
     }
 
-    public ArrayList<Enfermera> AgregarEnfermera(Enfermera enfermera, ArrayList<Enfermera> listaEnfermeras) {
-        for(int cont=0;cont<listaEnfermeras.size();cont++){
-            if(enfermera.getCC()==listaEnfermeras.get(cont).getCC()){
-                System.out.println("ya existe una enfermera con esta identificacion");
-                cont=listaEnfermeras.size();
-            }
-            else if(cont==(listaEnfermeras.size()-1)&&enfermera.getCC()!=listaEnfermeras.get(cont).getCC()){
-                listaEnfermeras.add(enfermera);
-                System.out.println("enfermera exitosamente agregada");
-            }
-        }
-        return listaEnfermeras;
+    public void AgregarEnfermera(Enfermera enfermera) {
+        dao.getDAOEnfermera().insertarEnfermera(enfermera);
     }
-    public void ModificarEnfermera() {
+    public void ModificarEnfermera(Enfermera enfermera) {
+        dao.getDAOEnfermera().modificarEnfermera(enfermera);
     }
 
-    public void EliminarEnfermera() {
+    public void EliminarEnfermera(int cc) {
+        dao.getDAOEnfermera().eliminarEnfermera(cc);
     }
 
     public  String md5(String clear) throws Exception {

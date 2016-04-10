@@ -15,6 +15,6 @@ import java.util.ArrayList;
 public interface DAOEnfermera {
     public void insertarEnfermera(Enfermera enfermera);
     public void modificarEnfermera(Enfermera enfermera);
-    public void eliminarEnfermera(Enfermera enfermera);
-    public ArrayList getListaEnfermera();
+    public void eliminarEnfermera(int cc);
+    public Enfermera consultarEnfermera(int cedula);
 }

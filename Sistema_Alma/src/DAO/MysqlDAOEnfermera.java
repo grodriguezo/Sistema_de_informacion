@@ -53,16 +53,23 @@ public class MysqlDAOEnfermera implements DAOEnfermera {
     }
 
     @Override
-    public void eliminarEnfermera(Enfermera enfermera) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void eliminarEnfermera(int cc) {
+        try {
+            String sql = "DELETE from enfermera WHERE CC_Enfermera='"+cc+"';";
+            Statement st = conexion.createStatement();
+            st.executeUpdate(sql);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
     }
 
-    //@Override
-   // public ArrayList getListaEnfermera() {
-      /*  ArrayList lista = new ArrayList<Enfermera>();
+    @Override
+    public Enfermera consultarEnfermera(int cedula) {
         Enfermera temp = new Enfermera();
         try {
-            String sql = "SELECT * FROM enfermera";
+            String sql = "SELECT * FROM enfermera where CC_Enfermera='"+cedula+"';";
             Statement st = conexion.createStatement();
             ResultSet rs = st.executeQuery(sql);
             for(;rs.next();){
@@ -77,15 +84,14 @@ public class MysqlDAOEnfermera implements DAOEnfermera {
                 String user = rs.getString("Usuario");
                 int ccadmin = rs.getInt("CC_Administrador");
                 temp = new Enfermera(cc,nombre,dir,correo,edad,idcity,contrasena,telefono,user,ccadmin);
-                lista.add(temp);
             }
             //admin = rs.getInt("CC_Administrador") + " " + rs.getString("Nombre");
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        }*/
-     //   return lista;
-    //}
+        }
+        return temp;
+    }
     
     public boolean consultarEnfermera(String usuario,String contraseña){
         boolean enfermera =false;
@@ -105,11 +111,6 @@ public class MysqlDAOEnfermera implements DAOEnfermera {
             e.printStackTrace();
         }
         return enfermera;
-    }
-
-    @Override
-    public ArrayList getListaEnfermera() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
