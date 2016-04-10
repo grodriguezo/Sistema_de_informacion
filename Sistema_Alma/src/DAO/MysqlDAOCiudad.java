@@ -43,7 +43,9 @@ public class MysqlDAOCiudad implements DAOCiudad{
     public void eliminarCiudad(Ciudad ciudad) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     public ArrayList getListaCiudad() {
+    
+    @Override
+    public ArrayList getListaCiudad() {
         ArrayList listaCiudad = new ArrayList<Ciudad>();
         Ciudad tempCiudad = new Ciudad();
         try {

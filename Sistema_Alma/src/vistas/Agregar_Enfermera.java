@@ -1,10 +1,13 @@
 package vistas;
 
 import DAO.DAOFactory;
+import Modelo.Ciudad;
 import Modelo.Enfermera;
 import java.awt.List;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 /*
@@ -19,11 +22,13 @@ import javax.swing.JOptionPane;
 public class Agregar_Enfermera extends javax.swing.JFrame {
 
     private DAOFactory MDC;
+    private ArrayList<Ciudad> listaCiudad;
 
     public Agregar_Enfermera() {
         initComponents();
         setLocationRelativeTo(null);
         DAOFactory MDC = DAOFactory.getDAOFactory(1);
+        listaCiudad = MDC.getDAOCiudad().getListaCiudad();
 
     }
 
@@ -59,6 +64,8 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
         depart = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
         ciudad = new javax.swing.JComboBox<>();
+        cc_admin = new javax.swing.JLabel();
+        tCcAdmin = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,12 +149,24 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
         });
         panel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(486, 348, -1, -1));
 
+        depart.setModel(departamentoToStringArray());
         panel1.add(depart, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 190, 270, -1));
 
         jLabel11.setText("Ciudad:");
         panel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 190, -1, -1));
 
+        ciudad.setModel(ciudadToStringArray((String)depart.getSelectedItem()));
         panel1.add(ciudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 190, 290, -1));
+
+        cc_admin.setText("C.C. Administrador: ");
+        panel1.add(cc_admin, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, -1, 20));
+
+        tCcAdmin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tCcAdminActionPerformed(evt);
+            }
+        });
+        panel1.add(tCcAdmin, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 270, 290, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,10 +202,10 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
                         enfermeraNueva.SetNombre(t_nombre.getText());
                         enfermeraNueva.SetDireccion(t_dir.getText());
                         enfermeraNueva.SetCorreo(t_correo.getText());
-                        enfermeraNueva.SetEdad((Integer)edad.getSelectedItem());
+                        enfermeraNueva.SetEdad((Integer) edad.getSelectedItem());
                         enfermeraNueva.SetContraseña(enfermeraNueva.md5(t_contra.getText()));
                         enfermeraNueva.SetUsuario(t_telefono.getText());
-                        enfermeraNueva.SetIdCiudad((Integer)ciudad.getSelectedItem());
+                        enfermeraNueva.SetIdCiudad((Integer) ciudad.getSelectedItem());
 
                         MDC.getDAOEnfermera().insertarEnfermera(enfermeraNueva);
                         JOptionPane.showMessageDialog(rootPane, "Inserto Satisfactoriamente");
@@ -241,6 +260,10 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botonCancelarActionPerformed
 
+    private void tCcAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tCcAdminActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tCcAdminActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -276,7 +299,38 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
         });
     }
 
+    public DefaultComboBoxModel ciudadToStringArray(String departamento) {
+        DefaultComboBoxModel retorno = new DefaultComboBoxModel();
+        for (int cont = 0; cont < listaCiudad.size(); cont++) {
+            if (listaCiudad.get(cont).equals(departamento)) {
+                retorno.addElement(listaCiudad.get(cont).getNombre_ciudad());
+            }
+        }
+        return retorno;
+    }
+
+    public DefaultComboBoxModel departamentoToStringArray() {
+        ArrayList<String> comprobar = new ArrayList();
+        DefaultComboBoxModel retorno = new DefaultComboBoxModel();
+        retorno.addElement(listaCiudad.get(0).getDepartamento());
+        comprobar.add(listaCiudad.get(0).getDepartamento());
+        for (int cont = 0; cont < listaCiudad.size(); cont++) {
+            String depActual = listaCiudad.get(cont).getDepartamento();
+            for (int cont2 = 0; cont < comprobar.size(); cont2++) {
+                if (comprobar.get(cont2).equals(depActual)) {
+                    cont+=comprobar.size();
+                }
+                else if(!(comprobar.get(cont2).equals(depActual))&&cont2==comprobar.size()-1){
+                    comprobar.add(depActual);
+                    retorno.addElement(depActual);
+                }
+            }
+        }
+        return retorno;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel cc_admin;
     private javax.swing.JComboBox<String> ciudad;
     private javax.swing.JComboBox<String> depart;
     private javax.swing.JComboBox<String> edad;
@@ -293,6 +347,7 @@ public class Agregar_Enfermera extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private org.edisoncor.gui.panel.Panel panel1;
+    private javax.swing.JTextField tCcAdmin;
     private javax.swing.JTextField t_cc;
     private javax.swing.JTextField t_contra;
     private javax.swing.JTextField t_correo;

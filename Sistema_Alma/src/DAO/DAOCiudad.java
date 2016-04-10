@@ -1,5 +1,6 @@
 package DAO;
 import Modelo.Ciudad;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,4 +16,5 @@ public interface DAOCiudad {
     public void insertarCiudad(Ciudad ciudad);
     public void modificarCiudad(Ciudad ciudad);
     public void eliminarCiudad(Ciudad ciudad);
+    public ArrayList getListaCiudad();
 }
